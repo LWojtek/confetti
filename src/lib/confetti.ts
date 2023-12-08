@@ -8,7 +8,7 @@ type Velocity = {
 	y: number;
 };
 type Settings = {
-	canvasSelector?: string;
+	canvasSelector: string;
 	targetSelector?: string;
 	targetX?: number;
 	targetY?: number;
@@ -149,7 +149,7 @@ class Confetti {
 	private dragConfetti: number;
 	private terminalVelocity: number;
 	private canvasSelector: string;
-	private targetSelector: string;
+	private targetSelector: string | undefined;
 	private targetX: number;
 	private targetY: number;
 	private particleWidth: NumberOrPair;
@@ -162,7 +162,7 @@ class Confetti {
 
 	constructor(settings?: Settings) {
 		this.canvasSelector = settings?.canvasSelector ?? '#confetti'; // Canvas selector
-		this.targetSelector = settings?.targetSelector ?? 'body'; // Target container element
+		this.targetSelector = settings?.targetSelector ?? this?.canvasSelector; // Target container element
 		this.targetX = settings?.targetX ?? 0.5; // Target container burst coordination X
 		this.targetY = settings?.targetY ?? 0.5; // Target container burst coordination Y
 		this.horizontalBurstRange = settings?.horizontalBurstRange ?? [-10, 10]; // Target container burst range X;
@@ -200,6 +200,8 @@ class Confetti {
 	}
 
 	private initBurst() {
+		if (!this.targetSelector) return;
+
 		const el = document.querySelector(this.targetSelector);
 		const rect = el?.getBoundingClientRect();
 
