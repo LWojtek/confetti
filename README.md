@@ -30,8 +30,7 @@ npm run serve
     onMounted(() => {
     
 	    const settings = {
-		     canvasSelector: "#confetti",
-    
+		    canvasSelector: "#confetti",
 		    targetSelector: ".element",
 	    }
     
