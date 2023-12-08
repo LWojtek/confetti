@@ -12,7 +12,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import Confetti from '../lib/confetti';
+import Confetti from '../lib/confetti'; // TypeScript support
+// import Confetti from '../lib/confetti.js'; // No TypeScript support
 
 const confetti = ref();
 
@@ -20,8 +21,6 @@ onMounted(() => {
 	const settings = {
 		canvasSelector: '#confetti',
 		targetSelector: '.mainComponent',
-		targetX: 0.5,
-		targetY: 0,
 	};
 	confetti.value = new Confetti(settings);
 });
