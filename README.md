@@ -28,14 +28,12 @@ npm run serve
     const confetti = ref();
     
     onMounted(() => {
-    
 	    const settings = {
 		    canvasSelector: "#confetti",
 		    targetSelector: ".element",
 	    }
-    
+	
 	    const confetti.value = new Confetti(settings)
-    
     })
 
   
