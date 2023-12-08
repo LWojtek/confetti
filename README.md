@@ -43,7 +43,7 @@ npm run serve
 
 # Confetti props
 
-**canvasSelector: string (required)**
+###canvasSelector: string (required)**
 A string representing the CSS selector for the canvas element on which the confetti animation will be rendered.
 
 **targetSelector: string (optional)**
