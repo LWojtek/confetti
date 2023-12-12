@@ -18,7 +18,7 @@ npm run serve
 
   
 
-#Confetti setup
+# Confetti setup
 
   
   
