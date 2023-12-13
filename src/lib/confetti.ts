@@ -159,8 +159,10 @@ class Confetti {
 	private fps: number;
 	private dimensions: Dimensions;
 	private coordinates: TargetCoordinates;
+	private boundResizeHandler: () => void;
 
 	constructor(settings?: Settings) {
+		this.boundResizeHandler = this.resizeHandler.bind(this);
 		this.canvasSelector = settings?.canvasSelector ?? '#confetti'; // Canvas selector
 		this.targetSelector = settings?.targetSelector ?? this?.canvasSelector; // Target container element
 		this.targetX = settings?.targetX ?? 0.5; // Target container burst coordination X
@@ -194,9 +196,15 @@ class Confetti {
 	}
 
 	private initEventListeners() {
-		window.addEventListener('resize', () => {
-			this.resizeCanvas();
-		});
+		window.addEventListener('resize', this.boundResizeHandler);
+	}
+
+	private destroyEventListeners() {
+		window.removeEventListener('resize', this.boundResizeHandler);
+	}
+
+	private resizeHandler() {
+		this.resizeCanvas();
 	}
 
 	private initBurst() {

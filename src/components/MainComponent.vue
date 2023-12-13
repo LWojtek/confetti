@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import Confetti from '../lib/confetti'; // TypeScript support
 // import Confetti from '../lib/confetti.js'; // No TypeScript support
 
@@ -23,6 +23,11 @@ onMounted(() => {
 		targetSelector: '.mainComponent',
 	};
 	confetti.value = new Confetti(settings);
+});
+
+onUnmounted(() => {
+	confetti.value.resetAnimation();
+	confetti.value.destroyEventListeners();
 });
 </script>
 
@@ -39,6 +44,11 @@ onMounted(() => {
 	background-color: white;
 	border-radius: 16px;
 	box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.1);
+
+	@media screen and (max-width: 767px) {
+		width: 100%;
+		height: 80%;
+	}
 }
 
 #confetti {
